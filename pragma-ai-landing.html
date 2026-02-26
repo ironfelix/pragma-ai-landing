@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pragma AI — Внедрение ИИ в бизнес. Без хайпа, с результатом.</title>
+    <meta name="description" content="AI-автоматизация для бизнеса: чат-боты, базы знаний, AI-агенты продаж. Фиксированная цена, результат за 14–30 дней. В 2–3 раза дешевле агентств.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a73e8'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Inter,system-ui,sans-serif' font-weight='700' font-size='14' fill='white'%3EP%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #ffffff;
+            --color-bg-secondary: #fafbfc;
+            --color-bg-tertiary: #f5f6f8;
+            --color-text: #1a1a1a;
+            --color-text-secondary: #5f6368;
+            --color-text-tertiary: #9aa0a6;
+            --color-border: #e8eaed;
+            --color-border-light: #f0f1f3;
+            --color-accent: #1a73e8;
+            --color-accent-hover: #1557b0;
+            --color-accent-bg: rgba(26, 115, 232, 0.07);
+            --color-accent-bg-strong: rgba(26, 115, 232, 0.14);
+            --color-success: #1e8a3e;
+            --color-success-bg: rgba(30, 138, 62, 0.07);
+            --color-warning: #b45309;
+            --color-warning-bg: rgba(180, 83, 9, 0.07);
+            --color-danger: #dc2626;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.04);
+            --container: 1060px;
+            --transition: 0.18s ease;
+        }
+
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: var(--font); background: var(--color-bg); color: var(--color-text); line-height: 1.6; font-size: 15px; overflow-x: hidden; }
+
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+        @media (min-width: 768px) { .container { padding: 0 40px; } }
+
+        .page-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+        .page-bg::before { content: ''; position: absolute; top: -15%; right: -10%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(26,115,232,0.035) 0%, transparent 65%); }
+        .page-bg::after { content: ''; position: absolute; bottom: 5%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(26,115,232,0.025) 0%, transparent 65%); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+        /* NAV */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 16px 0; transition: all var(--transition); }
+        .nav.scrolled { background: rgba(255,255,255,0.94); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--color-border); padding: 12px 0; }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 18px; font-weight: 800; letter-spacing: -0.3px; color: var(--color-text); }
+        .logo span { color: var(--color-accent); }
+        .nav-links { display: none; gap: 4px; }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+        .nav-link { padding: 6px 12px; color: var(--color-text-secondary); text-decoration: none; font-size: 13.5px; font-weight: 500; border-radius: var(--radius-sm); transition: color var(--transition); }
+        .nav-link:hover { color: var(--color-text); }
+        .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+        .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border: none; border-radius: var(--radius-full); font-family: var(--font); font-size: 13.5px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all var(--transition); }
+        .btn-primary { background: var(--color-text); color: #fff; }
+        .btn-primary:hover { background: #2a2a2a; box-shadow: 0 3px 10px rgba(0,0,0,0.14); transform: translateY(-1px); }
+        .btn-accent { background: var(--color-accent); color: #fff; }
+        .btn-accent:hover { background: var(--color-accent-hover); box-shadow: 0 4px 14px rgba(26,115,232,0.28); transform: translateY(-1px); }
+        .btn-ghost { background: transparent; color: var(--color-text-secondary); border: 1.5px solid var(--color-border); }
+        .btn-ghost:hover { color: var(--color-text); border-color: var(--color-text-tertiary); background: var(--color-bg-tertiary); }
+        .btn-lg { padding: 14px 30px; font-size: 15px; }
+
+        /* HERO */
+        .hero { position: relative; z-index: 1; padding: 130px 0 80px; }
+        @media (min-width: 768px) { .hero { padding: 150px 0 100px; } }
+        .hero-layout { display: flex; flex-direction: column; gap: 48px; }
+        @media (min-width: 900px) { .hero-layout { flex-direction: row; align-items: flex-start; gap: 64px; } }
+        .hero-content { flex: 1; max-width: 600px; }
+
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 5px 14px 5px 8px; background: var(--color-accent-bg); border: 1px solid rgba(26,115,232,0.14); border-radius: var(--radius-full); font-size: 12px; font-weight: 600; color: var(--color-accent); margin-bottom: 24px; animation: fadeUp 0.55s ease forwards; opacity: 0; }
+        .badge-dot { width: 7px; height: 7px; background: var(--color-accent); border-radius: 50%; animation: pulseDot 2s ease-in-out infinite; }
+
+        .hero h1 { font-size: clamp(30px, 4.5vw, 50px); font-weight: 800; line-height: 1.12; letter-spacing: -1.5px; color: var(--color-text); margin-bottom: 18px; animation: fadeUp 0.55s ease 0.08s forwards; opacity: 0; }
+        .hero h1 .accent { color: var(--color-accent); }
+        .hero h1 .strike { text-decoration: line-through; color: var(--color-text-tertiary); font-weight: 700; }
+
+        .hero-sub { font-size: clamp(15px, 1.8vw, 18px); color: var(--color-text-secondary); line-height: 1.65; max-width: 520px; margin-bottom: 36px; animation: fadeUp 0.55s ease 0.16s forwards; opacity: 0; }
+        .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; animation: fadeUp 0.55s ease 0.24s forwards; opacity: 0; }
+        .hero-trust { display: flex; flex-wrap: wrap; gap: 20px; animation: fadeUp 0.55s ease 0.32s forwards; opacity: 0; }
+        .trust-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-tertiary); }
+
+        /* Hero right: market data */
+        .hero-data { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; animation: fadeUp 0.55s ease 0.38s forwards; opacity: 0; }
+        @media (min-width: 900px) { .hero-data { flex-shrink: 0; width: 230px; grid-template-columns: 1fr; padding-top: 52px; } }
+        .stat-card { background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px 18px; }
+        .stat-val { font-size: 28px; font-weight: 800; letter-spacing: -1px; color: var(--color-text); line-height: 1; margin-bottom: 4px; }
+        .stat-val .accent { color: var(--color-accent); }
+        .stat-label { font-size: 12px; color: var(--color-text-tertiary); line-height: 1.4; }
+        .stat-src { font-size: 10px; color: var(--color-text-tertiary); opacity: 0.65; margin-top: 6px; }
+
+        /* MARKET TICKER */
+        .ticker { position: relative; z-index: 1; background: var(--color-bg-secondary); border-top: 1px solid var(--color-border-light); border-bottom: 1px solid var(--color-border-light); padding: 0; overflow: hidden; }
+        .ticker-inner { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding: 0 24px; }
+        .ticker-inner::-webkit-scrollbar { display: none; }
+        .ticker-item { display: flex; align-items: center; gap: 10px; padding: 14px 32px 14px 0; flex-shrink: 0; border-right: 1px solid var(--color-border-light); margin-right: 32px; }
+        .ticker-item:last-child { border-right: none; }
+        .ticker-num { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; color: var(--color-accent); }
+        .ticker-text { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.35; max-width: 160px; }
+
+        /* SECTIONS */
+        .section { position: relative; z-index: 1; padding: 80px 0; }
+        @media (min-width: 768px) { .section { padding: 100px 0; } }
+        .section-alt { background: var(--color-bg-secondary); }
+
+        .sec-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.6px; color: var(--color-accent); margin-bottom: 14px; }
+        .sec-label::before { content: ''; width: 18px; height: 2px; background: var(--color-accent); border-radius: 1px; }
+        .sec-title { font-size: clamp(26px, 3.8vw, 40px); font-weight: 800; letter-spacing: -1px; line-height: 1.13; color: var(--color-text); margin-bottom: 16px; }
+        .sec-sub { font-size: clamp(15px, 1.6vw, 17px); color: var(--color-text-secondary); line-height: 1.65; max-width: 520px; }
+        .sec-header { margin-bottom: 52px; }
+
+        /* SERVICES */
+        .services-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1000px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .service-card { background: var(--color-bg); border: 1.5px solid var(--color-border); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; transition: all 0.22s ease; position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--color-accent), rgba(26,115,232,0.3)); opacity: 0; transition: opacity var(--transition); }
+        .service-card:hover { border-color: rgba(26,115,232,0.3); box-shadow: 0 6px 24px rgba(26,115,232,0.1); transform: translateY(-3px); }
+        .service-card:hover::before { opacity: 1; }
+        .service-card.featured { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent), 0 6px 20px rgba(26,115,232,0.1); }
+        .service-card.featured::before { opacity: 1; }
+
+        .service-tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; margin-bottom: 16px; width: fit-content; }
+        .tag-blue { background: var(--color-accent-bg); color: var(--color-accent); }
+        .tag-green { background: rgba(30,138,62,0.08); color: var(--color-success); }
+        .tag-amber { background: rgba(180,83,9,0.07); color: var(--color-warning); }
+        .tag-purple { background: rgba(107,33,168,0.07); color: #6b21a8; }
+        .tag-teal { background: rgba(2,132,199,0.07); color: #0284c7; }
+        .tag-emerald { background: rgba(5,150,105,0.07); color: #059669; }
+
+        .service-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+        .service-card h3 { font-size: 17px; font-weight: 700; color: var(--color-text); margin-bottom: 8px; }
+        .service-card p { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.6; flex: 1; margin-bottom: 18px; }
+        .service-list { list-style: none; margin-bottom: 20px; display: flex; flex-direction: column; gap: 7px; }
+        .service-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--color-text-secondary); }
+        .service-list li::before { content: '✓'; color: var(--color-accent); font-weight: 700; font-size: 11px; flex-shrink: 0; margin-top: 2px; }
+
+        .service-price { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--color-border-light); }
+        .price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+        .price-val { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: var(--color-text); }
+        .price-market { font-size: 12px; color: var(--color-text-tertiary); }
+        .price-market s { color: var(--color-danger); opacity: 0.7; }
+        .price-note { font-size: 11.5px; color: var(--color-text-tertiary); }
+
+        /* HOW IT WORKS */
+        .steps { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 52px; }
+        @media (min-width: 768px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+        .step { position: relative; padding: 28px 24px; background: var(--color-bg); border: 1px solid var(--color-border); transition: box-shadow var(--transition); }
+        .step:not(:first-child) { margin-top: -1px; }
+        @media (min-width: 768px) { .step:not(:first-child) { margin-top: 0; margin-left: -1px; } }
+        .step:hover { z-index: 2; box-shadow: var(--shadow-md); }
+        .step-num { width: 36px; height: 36px; background: var(--color-accent-bg); border: 1.5px solid rgba(26,115,232,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: var(--color-accent); margin-bottom: 16px; }
+        .step h3 { font-size: 15px; font-weight: 700; color: var(--color-text); margin-bottom: 8px; }
+        .step p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.55; }
+        .step-time { margin-top: 12px; font-size: 11px; font-weight: 600; color: var(--color-accent); letter-spacing: 0.3px; }
+
+        /* CASES */
+        .cases-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 768px) { .cases-grid { grid-template-columns: repeat(3, 1fr); } }
+        .case-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 28px; transition: all var(--transition); }
+        .case-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        .case-tag { display: inline-block; padding: 3px 10px; background: var(--color-bg-tertiary); border-radius: var(--radius-full); font-size: 11px; font-weight: 600; color: var(--color-text-tertiary); margin-bottom: 16px; }
+        .case-card h3 { font-size: 16px; font-weight: 700; color: var(--color-text); margin-bottom: 10px; }
+        .case-card .case-body { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 22px; }
+        .case-results { display: flex; flex-direction: column; gap: 10px; }
+        .case-result { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--color-bg-secondary); border-radius: var(--radius-sm); }
+        .result-num { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; color: var(--color-accent); min-width: 60px; }
+        .result-label { font-size: 12px; color: var(--color-text-secondary); line-height: 1.35; }
+
+        /* URGENCY */
+        .urgency { position: relative; z-index: 1; background: var(--color-accent); padding: 64px 0; }
+        .urgency-inner { display: grid; grid-template-columns: 1fr; gap: 40px; }
+        @media (min-width: 768px) { .urgency-inner { grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; } }
+        .urgency h2 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 800; letter-spacing: -0.8px; line-height: 1.15; color: #fff; margin-bottom: 16px; }
+        .urgency p { font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.65; }
+        .urgency-stats { display: flex; flex-direction: column; gap: 14px; }
+        .urgency-stat { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 16px 20px; }
+        .us-val { font-size: 28px; font-weight: 800; letter-spacing: -1px; color: #fff; flex-shrink: 0; min-width: 70px; }
+        .us-text { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.4; }
+
+        /* PRICING */
+        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 860px; margin: 0 auto; }
+        @media (min-width: 640px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+        .pricing-card { background: var(--color-bg); border: 1.5px solid var(--color-border); border-radius: var(--radius-xl); padding: 32px 28px; display: flex; flex-direction: column; transition: all var(--transition); position: relative; }
+        .pricing-card:hover { box-shadow: var(--shadow-md); }
+        .pricing-card.popular { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent), 0 8px 24px rgba(26,115,232,0.12); }
+        .popular-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--color-accent); color: #fff; padding: 4px 16px; border-radius: var(--radius-full); font-size: 11px; font-weight: 700; white-space: nowrap; }
+        .pricing-name { font-size: 14px; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+        .pricing-price { font-size: 34px; font-weight: 800; letter-spacing: -1.5px; color: var(--color-text); margin-bottom: 4px; line-height: 1; }
+        .pricing-period { font-size: 13px; color: var(--color-text-tertiary); margin-bottom: 22px; }
+        .pricing-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--color-border-light); }
+        .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 9px; flex: 1; margin-bottom: 28px; }
+        .pricing-features li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--color-text-secondary); }
+        .pf-check { flex-shrink: 0; margin-top: 2px; width: 16px; height: 16px; background: var(--color-success-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--color-success); }
+        .pf-dash { flex-shrink: 0; margin-top: 2px; width: 16px; height: 16px; background: var(--color-bg-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--color-text-tertiary); }
+
+        /* TESTIMONIALS */
+        .testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 640px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 900px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+        .testimonial { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 22px; transition: all var(--transition); }
+        .testimonial:hover { box-shadow: var(--shadow-sm); }
+        .t-stars { display: flex; gap: 2px; margin-bottom: 12px; }
+        .t-star { color: #f59e0b; font-size: 14px; }
+        .t-text { font-size: 13.5px; color: var(--color-text); line-height: 1.6; margin-bottom: 16px; font-style: italic; }
+        .t-author { display: flex; align-items: center; gap: 10px; }
+        .t-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+        .t-name { font-size: 13px; font-weight: 600; color: var(--color-text); }
+        .t-role { font-size: 11.5px; color: var(--color-text-tertiary); }
+
+        /* FAQ */
+        .faq-list { max-width: 720px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid var(--color-border); }
+        .faq-item:first-child { border-top: 1px solid var(--color-border); }
+        .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--color-text); list-style: none; transition: color var(--transition); }
+        .faq-q:hover { color: var(--color-accent); }
+        .faq-q::marker, .faq-q::-webkit-details-marker { display: none; }
+        .faq-arrow { flex-shrink: 0; width: 22px; height: 22px; background: var(--color-bg-tertiary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--color-text-tertiary); transition: all var(--transition); }
+        details[open] .faq-arrow { background: var(--color-accent-bg); color: var(--color-accent); transform: rotate(180deg); }
+        .faq-a { padding: 0 0 18px; font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; }
+
+        /* CTA */
+        .cta-section { position: relative; z-index: 1; padding: 100px 0; background: linear-gradient(160deg, rgba(26,115,232,0.04) 0%, rgba(26,115,232,0.01) 100%); border-top: 1px solid var(--color-border); }
+        .cta-box { text-align: center; max-width: 580px; margin: 0 auto; }
+        .cta-label { display: inline-block; padding: 5px 14px; background: var(--color-accent-bg); border: 1px solid rgba(26,115,232,0.14); border-radius: var(--radius-full); font-size: 12px; font-weight: 600; color: var(--color-accent); margin-bottom: 20px; }
+        .cta-box h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -1.2px; line-height: 1.12; color: var(--color-text); margin-bottom: 16px; }
+        .cta-box p { font-size: 16px; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 36px; }
+        .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 24px; }
+        .cta-note { font-size: 12.5px; color: var(--color-text-tertiary); }
+
+        /* FOOTER */
+        .footer { position: relative; z-index: 1; padding: 48px 0; border-top: 1px solid var(--color-border); background: var(--color-bg); }
+        .footer-inner { display: flex; flex-direction: column; gap: 32px; }
+        @media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; } }
+        .footer-tagline { font-size: 13px; color: var(--color-text-tertiary); max-width: 220px; line-height: 1.5; margin-top: 10px; }
+        .footer-cols { display: flex; gap: 48px; flex-wrap: wrap; }
+        .footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--color-text-tertiary); margin-bottom: 12px; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .footer-links a { font-size: 13.5px; color: var(--color-text-secondary); text-decoration: none; transition: color var(--transition); }
+        .footer-links a:hover { color: var(--color-text); }
+        .footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--color-border-light); display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+        .footer-copy { font-size: 12.5px; color: var(--color-text-tertiary); }
+        .footer-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+        .footer-meta a { font-size: 12.5px; color: var(--color-text-tertiary); text-decoration: none; transition: color var(--transition); }
+        .footer-meta a:hover { color: var(--color-text-secondary); }
+
+        /* MOBILE CTA */
+        .mob-cta { display: flex; position: fixed; bottom: 20px; left: 0; right: 0; padding: 0 20px; z-index: 100; }
+        @media (min-width: 640px) { .mob-cta { display: none; } }
+        .mob-cta-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--color-accent); color: #fff; padding: 16px; border-radius: var(--radius-full); font-family: var(--font); font-size: 15px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 24px rgba(26,115,232,0.35); }
+
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .text-accent { color: var(--color-accent); }
+
+        /* WHY GRID */
+        .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+        @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
+        .why-card { padding: 28px 24px; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+        .why-num { font-size: 30px; font-weight: 800; color: var(--color-accent); margin-bottom: 10px; line-height: 1; font-feature-settings: "tnum"; }
+        .why-card h3 { font-size: 15px; font-weight: 700; color: var(--color-text); margin-bottom: 8px; }
+        .why-card p { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.65; margin: 0; }
+
+        /* DIFF GRID */
+        .diff-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; margin-top: 48px; }
+        @media (max-width: 768px) { .diff-grid { grid-template-columns: 1fr; } }
+        .diff-item { padding: 28px 24px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); border-left: 3px solid var(--color-accent); background: var(--color-bg); }
+        .diff-item h3 { font-size: 15px; font-weight: 700; color: var(--color-text); margin-bottom: 8px; }
+        .diff-item p { font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.65; margin: 0; }
+
+        /* TOOLTIPS */
+        .tip { position: relative; display: inline; border-bottom: 1px dashed var(--color-text-secondary); cursor: help; }
+        .tip-box { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #1a1a1a; color: #fff; font-size: 12px; line-height: 1.5; padding: 10px 14px; border-radius: 8px; white-space: normal; width: 230px; z-index: 200; box-shadow: 0 4px 16px rgba(0,0,0,0.2); font-weight: 400; }
+        .tip-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #1a1a1a; }
+        .tip:hover .tip-box, .tip:focus-within .tip-box { display: block; }
+        @media (max-width: 640px) { .tip-box { left: 0; transform: none; } .tip-box::after { left: 20px; transform: none; } }
+    </style>
+</head>
+<body>
+
+<div class="page-bg"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+    <div class="container">
+        <div class="nav-inner">
+            <a href="#" class="logo">
+                PRAGMA<span> AI</span>
+            </a>
+            <div class="nav-links">
+                <a href="#how" class="nav-link">Как работаем</a>
+                <a href="#services" class="nav-link">Услуги</a>
+                <a href="#cases" class="nav-link">Кейсы</a>
+                <a href="#pricing" class="nav-link">Цены</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <a href="#cta" class="btn btn-primary">Получить аудит</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-layout">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <div class="badge-dot"></div>
+                    Рынок генеративного ИИ в России вырос в 5 раз за 2025 год.
+                </div>
+                <h1>
+                    Внедряем ИИ<br>
+                    <span class="accent">за 30 дней</span><br>
+                    с фиксированной ценой
+                </h1>
+                <p class="hero-sub">
+                    Чат-боты, базы знаний, AI-агенты. Объём работ, сроки и стоимость — в договоре до старта.
+                    Три встречи с вашей стороны за весь проект.
+                </p>
+                <div class="hero-cta">
+                    <a href="#cta" class="btn btn-accent btn-lg">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        Бесплатный AI-аудит
+                    </a>
+                    <a href="#cases" class="btn btn-ghost btn-lg">Посмотреть кейсы →</a>
+                </div>
+                <div class="hero-trust">
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Договор и NDA
+                    </div>
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        Результат за 14–30 дней
+                    </div>
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        Российские <span class="tip">языковые модели<span class="tip-box">GigaChat, YandexGPT, DeepSeek — данные обрабатываются в России, не передаются за рубеж.</span></span> — данные не уходят
+                    </div>
+                </div>
+            </div>
+
+            <!-- Рыночные данные -->
+            <div class="hero-data">
+                <div class="stat-card">
+                    <div class="stat-val"><span class="accent">×5</span></div>
+                    <div class="stat-label">рост рынка генеративного ИИ за 2025 год</div>
+                    <div class="stat-src">CNews, Smart Ranking 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val">39<span style="font-size:18px;font-weight:700">%</span></div>
+                    <div class="stat-label">компаний уже используют AI в продажах</div>
+                    <div class="stat-src">Ведомости / Gartner 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val">63<span style="font-size:18px;font-weight:700">%</span></div>
+                    <div class="stat-label">МСБ считает экономию времени главной ценностью ИИ</div>
+                    <div class="stat-src">НАФИ 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val"><span class="accent">1–3</span></div>
+                    <div class="stat-label">месяца до окупаемости AI-проектов для МСБ</div>
+                    <div class="stat-src">рыночная практика</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARKET TICKER -->
+<div class="ticker">
+    <div class="ticker-inner">
+        <div class="ticker-item">
+            <span class="ticker-num">58 млрд ₽</span>
+            <span class="ticker-text">рынок генеративного ИИ в России 2025</span>
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-num">50%</span>
+            <span class="ticker-text">подбора линейного персонала — через AI-агентов</span>
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-num">+45%</span>
+            <span class="ticker-text">ежегодный рост рынка ИИ в РФ</span>
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-num">−85%</span>
+            <span class="ticker-text">время на создание контента после внедрения AI</span>
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-num">40,6 млрд ₽</span>
+            <span class="ticker-text">рынок HRtech в России 2025</span>
+        </div>
+        <div class="ticker-item">
+            <span class="ticker-num">2025–2027</span>
+            <span class="ticker-text">фаза раннего большинства — автоматизация ещё даёт преимущество</span>
+        </div>
+    </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt reveal" id="how">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-label">Процесс</div>
+            <h2 class="sec-title">От заявки до запуска —<br>4 шага, 3 часа вашего времени</h2>
+            <p class="sec-sub">
+                Вашего времени нужно около трёх часов на весь проект.
+                Первая встреча, согласование, приёмка.
+            </p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Аудит и бриф</h3>
+                <p>60 минут: изучаем ваши процессы, данные, текущие инструменты. Вы описываете задачу — мы фиксируем всё, что нужно для старта.</p>
+                <div class="step-time">День 1–2 · 1 ч вашего времени</div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Архитектура</h3>
+                <p>Проектируем систему, выбираем модели (GigaChat / YandexGPT / DeepSeek), прописываем сценарии. Показываем схему на согласование — вы подтверждаете.</p>
+                <div class="step-time">День 3–7 · 45 мин вашего времени</div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Разработка</h3>
+                <p>Строим систему, настраиваем инструкции для ИИ, тестируем на реальных данных. Показываем промежуточный результат и учитываем ваши правки.</p>
+                <div class="step-time">День 8–25 · без вас</div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <h3>Запуск и передача</h3>
+                <p>Запускаем систему, обучаем команду за 45 минут, передаём документацию и доступы. После запуска — 3 месяца поддержки бесплатно.</p>
+                <div class="step-time">День 26–30 · 45 мин вашего времени</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section reveal" id="why">
+    <div class="container">
+        <div class="sec-label">Почему не выходит самостоятельно</div>
+        <h2 class="sec-title">Три стандартных пути —<br>три разных изъяна</h2>
+        <p class="sec-sub">Не потому что подрядчики плохие. Просто задачи МСБ и Enterprise — разные.</p>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-num">от 2,5 млн ₽</div>
+                <h3>Крупные интеграторы</h3>
+                <p>Порог входа — полгода переговоров и тендерных требований. Бюджет и сроки рассчитаны на Enterprise, а не на компании с 10–100 сотрудниками.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-num">70%</div>
+                <h3>Фрилансеры</h3>
+                <p>Семь из десяти проектов не доходит до реальной работы. Нет гарантий, поддержки, понимания бизнес-задачи — и некому отвечать за результат.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-num">40–80 ч</div>
+                <h3>Своими силами</h3>
+                <p>ChatGPT, Make, n8n — выглядит доступно. На деле команда тратит две рабочие недели и получает нестабильный прототип вместо рабочей системы.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section reveal" id="services">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-label">Услуги</div>
+            <h2 class="sec-title">Шесть AI-решений<br>с фиксированной ценой</h2>
+            <p class="sec-sub">
+                Готовые решения под конкретные задачи. Объём работ, сроки и цена — в договоре. Без доплат по ходу.
+            </p>
+        </div>
+
+        <div class="services-grid">
+
+            <div class="service-card">
+                <span class="tag-blue service-tag">С этого начинают</span>
+                <span class="service-icon">🔍</span>
+                <h3>AI Аудит + Дорожная карта</h3>
+                <p>Разберёмся, где ИИ сэкономит вам больше всего. Через 7 дней — конкретный план с расчётом окупаемости по каждому направлению. Стоимость зачтётся при заказе внедрения.</p>
+                <ul class="service-list">
+                    <li>Анализ 3–5 ваших процессов</li>
+                    <li>Расчёт экономии в ₽/месяц</li>
+                    <li>Дорожная карта на 90 дней</li>
+                    <li>Сравнение инструментов под задачу</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-row">
+                        <span class="price-val">40 000 ₽</span>
+                    </div>
+                    <div class="price-note">7 дней · зачтётся при внедрении</div>
+                </div>
+            </div>
+
+            <div class="service-card featured">
+                <span class="tag-green service-tag">⭐ Чаще всего берут</span>
+                <span class="service-icon">🤖</span>
+                <h3>AI Чат-бот для продаж и поддержки</h3>
+                <p>Бот в Telegram или WhatsApp отвечает на вопросы круглосуточно, отбирает заинтересованных клиентов и передаёт их менеджеру. Агентства берут за то же самое 200–500 тыс. руб.</p>
+                <ul class="service-list">
+                    <li>Обработка входящих без менеджера</li>
+                    <li>Отбор клиентов по вашим критериям</li>
+                    <li>Интеграция с <span class="tip">CRM<span class="tip-box">Система управления клиентами — Bitrix24, amoCRM и аналоги.</span></span> (Bitrix24, amoCRM)</li>
+                    <li>Ответы из вашей базы знаний</li>
+                    <li>Переключение на живого человека</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-row">
+                        <span class="price-val">150 000 ₽</span>
+                        <span class="price-market">рынок: <s>200–500 тыс.</s></span>
+                    </div>
+                    <div class="price-note">под ключ · 21 день</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <span class="tag-amber service-tag">Экономит время команды</span>
+                <span class="service-icon">📚</span>
+                <h3>AI База знаний (<span class="tip">RAG<span class="tip-box">Retrieval-Augmented Generation — поиск по документам с помощью языковой модели. Задаёшь вопрос — ИИ находит точный ответ в ваших файлах.</span></span>)</h3>
+                <p>Поиск по вашим документам, регламентам, инструкциям. Сотрудники находят ответ за секунды. У крупных интеграторов аналог стоит от 2,5 млн руб.</p>
+                <ul class="service-list">
+                    <li>Загрузка PDF, Word, Excel, Notion</li>
+                    <li>Умный поиск с контекстом и цитатами</li>
+                    <li>Автообновление при изменении документов</li>
+                    <li>Интерфейс в Telegram или браузере</li>
+                    <li>Ролевой доступ для разных отделов</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-row">
+                        <span class="price-val">280 000 ₽</span>
+                        <span class="price-market">рынок: <s>от 2,5 млн</s></span>
+                    </div>
+                    <div class="price-note">под ключ · 30 дней</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <span class="tag-purple service-tag">Продажи</span>
+                <span class="service-icon">📈</span>
+                <h3>AI Агент для отдела продаж</h3>
+                <p>Расшифровка звонков, автозаполнение <span class="tip">CRM<span class="tip-box">Система управления клиентами — Bitrix24, amoCRM и аналоги.</span></span>, подготовка КП — без участия менеджера. 39% компаний уже используют AI-агентов в продажах.</p>
+                <ul class="service-list">
+                    <li>Расшифровка и анализ звонков</li>
+                    <li>Автозаполнение карточек сделки в CRM</li>
+                    <li>Генерация КП по шаблону клиента</li>
+                    <li>Автоматические напоминания клиентам</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-row">
+                        <span class="price-val">240 000 ₽</span>
+                    </div>
+                    <div class="price-note">под ключ · 28 дней</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <span class="tag-teal service-tag">Контент</span>
+                <span class="service-icon">✍️</span>
+                <h3>AI Контент-машина</h3>
+                <p>Автогенерация карточек товаров, постов, SEO-текстов, описаний. По опыту рынка, внедрение ИИ в контент сокращает время создания на 85%.</p>
+                <ul class="service-list">
+                    <li>Шаблоны под голос вашего бренда</li>
+                    <li>Массовая генерация от 100 ед./сутки</li>
+                    <li>Интеграция с <span class="tip">CMS<span class="tip-box">Система управления сайтом — WordPress, Tilda и аналоги.</span></span>, WB, Ozon</li>
+                    <li>SEO-оптимизация и проверка уникальности</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-row">
+                        <span class="price-val">120 000 ₽</span>
+                    </div>
+                    <div class="price-note">под ключ · 14 дней</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <span class="tag-emerald service-tag">HR</span>
+                <span class="service-icon">👥</span>
+                <h3>AI HR-ассистент</h3>
+                <p>Первичный отбор резюме, интервью в чате, расписание встреч — без HR-менеджера. Уже сейчас 50% подбора линейного персонала в России проходит через AI-агентов.</p>
+                <ul class="service-list">
+                    <li><span class="tip">Скрининг<span class="tip-box">Первичная проверка резюме по заданным критериям: опыт, навыки, образование.</span></span> резюме по критериям вакансии</li>
+                    <li>Чат-интервью на первичный отбор</li>
+                    <li>Расписание в Google Calendar / Calendly</li>
+                    <li>Отчёты по воронке найма</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-row">
+                        <span class="price-val">180 000 ₽</span>
+                    </div>
+                    <div class="price-note">под ключ · 21 день</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align:center; margin-top: 36px; padding: 24px; background: var(--color-bg-secondary); border-radius: var(--radius-lg); border: 1px solid var(--color-border);">
+            <p style="font-size:15px; font-weight:600; margin-bottom:6px;">Нужна нестандартная задача?</p>
+            <p style="font-size:13.5px; color:var(--color-text-secondary); margin-bottom:16px;">
+                Интеграция <span class="tip">языковых моделей<span class="tip-box">LLM (Large Language Model) — основа ChatGPT, GigaChat и аналогов. Понимают текст и генерируют ответы.</span></span> в 1С или Битрикс24, автоматизация документооборота,
+                сложные AI-агенты. Обсудим объём работ и назовём цену.
+            </p>
+            <a href="#cta" class="btn btn-ghost">Обсудить задачу →</a>
+        </div>
+    </div>
+</section>
+
+<!-- CASES -->
+<section class="section reveal" id="cases">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-label">Кейсы</div>
+            <h2 class="sec-title">Что сделали —<br>и чего это стоило</h2>
+            <p class="sec-sub">
+                Реальные проекты. Цифры конкретные.
+                Детали — под <span class="tip">NDA<span class="tip-box">Соглашение о неразглашении — документ, защищающий коммерческую тайну клиента.</span></span>, общую картину показываем открыто.
+            </p>
+        </div>
+        <div class="cases-grid">
+            <div class="case-card">
+                <span class="case-tag">Поддержка клиентов · E-commerce</span>
+                <h3>AI-поддержка вместо колл-центра из 3 человек</h3>
+                <p class="case-body">
+                    Интернет-магазин электроники. 400 обращений в день, 3 оператора. Внедрили чат-бот с <span class="tip">базой знаний<span class="tip-box">RAG — поиск по документам с помощью языковой модели. ИИ отвечает точно, опираясь только на ваши файлы.</span></span> по 200+ документам: отвечает на 78% вопросов без участия человека.
+                </p>
+                <div class="case-results">
+                    <div class="case-result">
+                        <span class="result-num">−72%</span>
+                        <span class="result-label">нагрузки на операторов за 1 месяц</span>
+                    </div>
+                    <div class="case-result">
+                        <span class="result-num">+31%</span>
+                        <span class="result-label">рост <span class="tip">NPS<span class="tip-box">Net Promoter Score — индекс готовности рекомендовать компанию другим. Диапазон: от −100 до +100.</span></span> клиентов поддержки</span>
+                    </div>
+                    <div class="case-result">
+                        <span class="result-num">28 дн</span>
+                        <span class="result-label">от старта до запуска</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-card">
+                <span class="case-tag">Продажи · B2B услуги</span>
+                <h3>AI-агент обрабатывает 120 лидов в неделю</h3>
+                <p class="case-body">
+                    Компания по аутсорсингу бухгалтерии. Менеджеры тратили 60% времени на первичный разбор входящих заявок. Автоматизировали первый контакт и заполнение CRM.
+                </p>
+                <div class="case-results">
+                    <div class="case-result">
+                        <span class="result-num">×2.4</span>
+                        <span class="result-label">больше лидов при той же команде</span>
+                    </div>
+                    <div class="case-result">
+                        <span class="result-num">−60%</span>
+                        <span class="result-label">времени на рутину в продажах</span>
+                    </div>
+                    <div class="case-result">
+                        <span class="result-num">21 дн</span>
+                        <span class="result-label">от брифа до запуска</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="case-card">
+                <span class="case-tag">HR · Рекрутинговое агентство</span>
+                <h3>AI-скрининг 500 резюме в неделю вместо HR</h3>
+                <p class="case-body">
+                    Агентство закрывает по 30 вакансий в месяц. HR тратил по 15 секунд на резюме — всё равно не успевал. В России 50% подбора линейного персонала уже ведётся через AI-агентов. Настроили своё решение.
+                </p>
+                <div class="case-results">
+                    <div class="case-result">
+                        <span class="result-num">−65%</span>
+                        <span class="result-label">времени HR на скрининг</span>
+                    </div>
+                    <div class="case-result">
+                        <span class="result-num">×2.8</span>
+                        <span class="result-label">скорость закрытия вакансий</span>
+                    </div>
+                    <div class="case-result">
+                        <span class="result-num">22 дн</span>
+                        <span class="result-label">от ТЗ до полного запуска</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY PRAGMA -->
+<section class="section section-alt reveal">
+    <div class="container">
+        <div class="sec-label">Отличия</div>
+        <h2 class="sec-title">Четыре условия,<br>которые можно проверить в договоре</h2>
+        <p class="sec-sub">Не слова — пункты соглашения. Если не выполняем, работаем за свой счёт.</p>
+        <div class="diff-grid">
+            <div class="diff-item">
+                <h3>Цена фиксируется до старта</h3>
+                <p>Никаких «зависит от» и «рассчитаем в процессе». Стоимость прописана в договоре. Дополнительные работы — только по отдельному соглашению.</p>
+            </div>
+            <div class="diff-item">
+                <h3>14–30 дней от брифа до запуска</h3>
+                <p>Готовые блоки адаптируем под вашу задачу. Когда задача типовая, не разрабатываем с нуля — поэтому укладываемся в реальные сроки, а не растягиваем на кварталы.</p>
+            </div>
+            <div class="diff-item">
+                <h3>Российские модели, нет санкционных рисков</h3>
+                <p>По умолчанию GigaChat и YandexGPT. Данные хранятся в России, соответствие 152-ФЗ. Нет зависимости от западных платформ и решений об ограничениях.</p>
+            </div>
+            <div class="diff-item">
+                <h3>3 месяца поддержки включены в цену</h3>
+                <p>После запуска мы не пропадаем. Отвечаем на вопросы, исправляем ошибки, помогаем команде освоить систему без дополнительных счетов.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- URGENCY SECTION -->
+<section class="urgency reveal">
+    <div class="container">
+        <div class="urgency-inner">
+            <div>
+                <h2>2025–2027: автоматизация ещё даёт преимущество</h2>
+                <p>
+                    Рынок ИИ в России растёт на 45% в год. 39% компаний уже используют ИИ в продажах.
+                    Те, кто автоматизируется сейчас, обходят конкурентов по скорости и стоимости операций.
+                    К 2027 году, по оценкам рынка, ИИ-инструменты станут стандартом — как CRM десять лет назад.
+                </p>
+            </div>
+            <div class="urgency-stats">
+                <div class="urgency-stat">
+                    <span class="us-val">+45%</span>
+                    <span class="us-text">ежегодный рост рынка ИИ в России в 2025 году</span>
+                </div>
+                <div class="urgency-stat">
+                    <span class="us-val">39%</span>
+                    <span class="us-text">компаний уже используют ИИ в продажах</span>
+                </div>
+                <div class="urgency-stat">
+                    <span class="us-val">1–3 мес</span>
+                    <span class="us-text">типичная окупаемость ИИ-проектов в малом и среднем бизнесе</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="section section-alt reveal" id="pricing">
+    <div class="container">
+        <div class="sec-header" style="text-align:center">
+            <div class="sec-label" style="justify-content:center; margin: 0 auto 14px;">Цены</div>
+            <h2 class="sec-title">Три способа начать</h2>
+            <p class="sec-sub" style="margin: 0 auto;">Начните с аудита — поймёте ROI ещё до оплаты внедрения.</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-name">Старт</div>
+                <div class="pricing-price">40 000 ₽</div>
+                <div class="pricing-period">разово · 7 дней</div>
+                <div class="pricing-desc">AI-аудит и дорожная карта. Узнайте, где именно ИИ сэкономит деньги именно в вашем бизнесе.</div>
+                <ul class="pricing-features">
+                    <li><span class="pf-check">✓</span> Анализ 3–5 ваших процессов</li>
+                    <li><span class="pf-check">✓</span> Расчёт ROI и экономии ₽/мес</li>
+                    <li><span class="pf-check">✓</span> Дорожная карта на 90 дней</li>
+                    <li><span class="pf-check">✓</span> Сравнение инструментов</li>
+                    <li><span class="pf-dash">—</span> Разработка решения</li>
+                    <li><span class="pf-dash">—</span> Техподдержка</li>
+                </ul>
+                <a href="#cta" class="btn btn-ghost" style="width:100%; justify-content:center;">Заказать аудит</a>
+            </div>
+
+            <div class="pricing-card popular">
+                <span class="popular-badge">Выбирают чаще всего</span>
+                <div class="pricing-name">Внедрение</div>
+                <div class="pricing-price">от 120 000 ₽</div>
+                <div class="pricing-period">под ключ · 14–30 дней</div>
+                <div class="pricing-desc">Одно AI-решение под ключ — чат-бот, база знаний, контент-машина или HR-ассистент. Всё включено.</div>
+                <ul class="pricing-features">
+                    <li><span class="pf-check">✓</span> Аудит включён в цену</li>
+                    <li><span class="pf-check">✓</span> Разработка и настройка</li>
+                    <li><span class="pf-check">✓</span> Интеграция с вашими системами</li>
+                    <li><span class="pf-check">✓</span> Обучение команды (45 мин)</li>
+                    <li><span class="pf-check">✓</span> 3 месяца техподдержки</li>
+                    <li><span class="pf-check">✓</span> Документация и доступы</li>
+                </ul>
+                <a href="#cta" class="btn btn-accent" style="width:100%; justify-content:center;">Обсудить проект</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-name">Развитие</div>
+                <div class="pricing-price">от 60 000 ₽</div>
+                <div class="pricing-period">в месяц · абонентское обслуживание</div>
+                <div class="pricing-desc">Постоянный AI-партнёр: поддержка, улучшение систем, новая автоматизация каждый месяц.</div>
+                <ul class="pricing-features">
+                    <li><span class="pf-check">✓</span> Поддержка всех систем</li>
+                    <li><span class="pf-check">✓</span> 1 новая автоматизация в месяц</li>
+                    <li><span class="pf-check">✓</span> Мониторинг и улучшение настроек ИИ</li>
+                    <li><span class="pf-check">✓</span> Ежемесячный отчёт об эффекте</li>
+                    <li><span class="pf-check">✓</span> Приоритетный ответ за 2 часа</li>
+                    <li><span class="pf-check">✓</span> Доступ ко всем новым блокам</li>
+                </ul>
+                <a href="#cta" class="btn btn-ghost" style="width:100%; justify-content:center;">Узнать подробнее</a>
+            </div>
+        </div>
+        <p style="text-align:center; margin-top:28px; font-size:13px; color:var(--color-text-tertiary);">
+            Без НДС. Цена фиксируется в договоре. Работаем с юрлицами и ИП.
+        </p>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section reveal">
+    <div class="container">
+        <div class="sec-header">
+            <div class="sec-label">Отзывы</div>
+            <h2 class="sec-title">Что говорят клиенты</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+                <p class="t-text">«Смотрели на несколько агентств — везде называли 400–600K и 3 месяца. Pragma уложились в 150K и 3 недели. Чат-бот закрывает 70% типовых вопросов сам. Менеджеры довольны.»</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background: #1a73e8;">АМ</div>
+                    <div>
+                        <div class="t-name">Александр Морозов</div>
+                        <div class="t-role">CEO, онлайн-магазин стройматериалов</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+                <p class="t-text">«RAG-система изменила работу поддержки. Операторы больше не звонят мне с вопросом «где это написано». Ищут в базе и находят быстрее, чем любой коллега.»</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background: #059669;">ЕВ</div>
+                    <div>
+                        <div class="t-name">Елена Волкова</div>
+                        <div class="t-role">Операционный директор, логистика</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="t-stars"><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span><span class="t-star">★</span></div>
+                <p class="t-text">«Пробовал фрилансера — сделал и пропал. С Pragma всё по-другому: договор, встречи по расписанию, после сдачи ещё 3 месяца отвечают на вопросы. Спокойно.»</p>
+                <div class="t-author">
+                    <div class="t-avatar" style="background: #7c3aed;">ДК</div>
+                    <div>
+                        <div class="t-name">Дмитрий Ковалёв</div>
+                        <div class="t-role">Собственник, кадровое агентство</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-alt reveal" id="faq">
+    <div class="container">
+        <div class="sec-header" style="text-align:center">
+            <div class="sec-label" style="justify-content:center; margin: 0 auto 14px;">FAQ</div>
+            <h2 class="sec-title">Частые вопросы</h2>
+        </div>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary class="faq-q">Почему так дёшево по сравнению с агентствами?<span class="faq-arrow">▾</span></summary>
+                <p class="faq-a">Агентства продают кастомную разработку с нуля — это дорого и долго. Мы используем готовые AI-блоки, которые адаптируем под ваши данные и процессы. Это как покупать квартиру с отделкой вместо «коробки». Качество то же, сроки и цена — в 2–3 раза ниже.</p>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-q">Какие <span class="tip">языковые модели<span class="tip-box">LLM (Large Language Model) — основа ChatGPT, GigaChat и аналогов. Понимают текст и генерируют ответы.</span></span> используете — нет ли санкционных рисков?<span class="faq-arrow">▾</span></summary>
+                <p class="faq-a">По умолчанию — GigaChat (Сбер) и YandexGPT. Данные хранятся в России, соответствуют 152-ФЗ, санкционных рисков нет. Для задач, где нужна более высокая точность ответов, подключаем DeepSeek (Китай) или Llama (открытый код). OpenAI/Claude — только по явному запросу клиента.</p>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-q">Нужны ли нам разработчики для поддержки после сдачи?<span class="faq-arrow">▾</span></summary>
+                <p class="faq-a">Нет. Все системы строятся так, чтобы ваша команда управляла ими без технических знаний: обновить базу знаний, изменить шаблон, добавить пользователя. Три месяца нашей поддержки включены. Дальше — необязательное абонентское обслуживание от 60 тыс./мес.</p>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-q">Что если результат нас не устроит?<span class="faq-arrow">▾</span></summary>
+                <p class="faq-a">В договоре фиксируем критерии приёмки — конкретные метрики (точность, скорость, доля автообработки). Если система не достигает согласованных показателей в течение 30 дней после запуска, дорабатываем за наш счёт. Нам важен работающий результат, а не галочка в отчёте.</p>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-q">Мы небольшая компания — это вообще для нас?<span class="faq-arrow">▾</span></summary>
+                <p class="faq-a">Пакетный подход — специально для малого и среднего бизнеса. 63% МСП в России уже используют ИИ и ценят его именно за экономию времени, а не за «стратегическую трансформацию». Большинство наших клиентов — компании с 5–30 сотрудниками. Если не уверены, начните с аудита за 40 тыс. руб.: он покажет расчёт окупаемости до внедрения.</p>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-q">Сколько времени займёт у моей команды?<span class="faq-arrow">▾</span></summary>
+                <p class="faq-a">Три встречи: вводная (60 мин), согласование схемы системы (45 мин), приёмка и обучение (90 мин). Итого около 3 часов за весь проект. Промежуточные вопросы — в Telegram текстом, без созвонов.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal" id="cta">
+    <div class="container">
+        <div class="cta-box">
+            <span class="cta-label">Бесплатно · без обязательств</span>
+            <h2>Разберёмся, что ИИ<br>сэкономит в вашем бизнесе</h2>
+            <p>Расскажите о задаче — получите конкретные цифры: какой процесс, сколько экономит в рублях и что нужно для запуска. Встреча занимает 30 минут.</p>
+            <div class="cta-actions">
+                <a href="https://t.me/pragmaai" class="btn btn-accent btn-lg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.97 9.29c-.14.67-.53.83-1.06.52l-2.94-2.17-1.42 1.37c-.16.16-.29.29-.59.29l.21-2.99 5.43-4.9c.24-.21-.05-.32-.36-.11L7.6 14.21l-2.89-.9c-.63-.19-.64-.63.13-.93l11.28-4.35c.53-.19.99.13.82.77z" fill="currentColor"/></svg>
+                    Написать в Telegram
+                </a>
+                <a href="mailto:hello@pragma-ai.ru" class="btn btn-ghost btn-lg">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 4l-7 4.5L5 8V6l7 4.5L19 6v2z" fill="currentColor"/></svg>
+                    Email
+                </a>
+            </div>
+            <p class="cta-note">Ответ за 2 часа · Работаем по всей России · Договор с юрлицами и ИП</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    PRAGMA<span> AI</span>
+                </a>
+                <p class="footer-tagline">AI-автоматизация для бизнеса. Фиксированная цена. Результат за 30 дней.</p>
+            </div>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <h4>Услуги</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">AI Аудит</a></li>
+                        <li><a href="#services">Чат-бот</a></li>
+                        <li><a href="#services">База знаний (RAG)</a></li>
+                        <li><a href="#services">AI Продажи</a></li>
+                        <li><a href="#services">Контент-машина</a></li>
+                        <li><a href="#services">HR-ассистент</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="#cases">Кейсы</a></li>
+                        <li><a href="#pricing">Цены</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#cta">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copy">© 2026 Pragma AI</span>
+            <div class="footer-meta">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Договор оферты</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- MOBILE STICKY CTA -->
+<div class="mob-cta">
+    <a href="#cta" class="mob-cta-btn">Получить AI-аудит бесплатно →</a>
+</div>
+
+<script>
+    // Navbar scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+    }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' }); }
+        });
+    });
+</script>
+</body>
+</html>
