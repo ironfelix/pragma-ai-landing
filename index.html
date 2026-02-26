@@ -291,6 +291,18 @@
         .tip-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #1a1a1a; }
         .tip:hover .tip-box, .tip:focus-within .tip-box { display: block; }
         @media (max-width: 640px) { .tip-box { left: 0; transform: none; } .tip-box::after { left: 20px; transform: none; } }
+        /* PRIVACY MODAL */
+        .modal-overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.open { display: flex; }
+        .modal-box { background: var(--color-bg); border-radius: var(--radius-xl); max-width: 680px; width: 100%; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 24px 64px rgba(0,0,0,0.2); }
+        .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 24px 28px 20px; border-bottom: 1px solid var(--color-border); flex-shrink: 0; }
+        .modal-head h3 { font-size: 18px; font-weight: 700; color: var(--color-text); }
+        .modal-close { width: 32px; height: 32px; background: var(--color-bg-tertiary); border: none; border-radius: 50%; cursor: pointer; font-size: 18px; color: var(--color-text-secondary); display: flex; align-items: center; justify-content: center; transition: all var(--transition); }
+        .modal-close:hover { background: var(--color-border); color: var(--color-text); }
+        .modal-body { overflow-y: auto; padding: 28px; flex: 1; font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.7; }
+        .modal-body h4 { font-size: 14px; font-weight: 700; color: var(--color-text); margin: 20px 0 8px; }
+        .modal-body h4:first-child { margin-top: 0; }
+        .modal-body p { margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -312,7 +324,7 @@
                 <a href="#faq" class="nav-link">FAQ</a>
             </div>
             <div class="nav-actions">
-                <a href="#cta" class="btn btn-primary">Получить аудит</a>
+                <a href="#cta" class="btn btn-primary">Записаться</a>
             </div>
         </div>
     </div>
@@ -339,7 +351,7 @@
                 <div class="hero-cta">
                     <a href="#cta" class="btn btn-accent btn-lg">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                        Бесплатный AI-аудит
+                        Бесплатная консультация
                     </a>
                     <a href="#cases" class="btn btn-ghost btn-lg">Посмотреть кейсы →</a>
                 </div>
@@ -354,7 +366,7 @@
                     </div>
                     <div class="trust-item">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                        Российские <span class="tip">языковые модели<span class="tip-box">GigaChat, YandexGPT, DeepSeek — данные обрабатываются в России, не передаются за рубеж.</span></span> — данные не уходят
+                        Российские и дружественные <span class="tip">языковые модели<span class="tip-box">GigaChat, YandexGPT — российские. DeepSeek (Китай) — разворачиваем на серверах в России, данные не уходят.</span></span>
                     </div>
                 </div>
             </div>
@@ -421,7 +433,7 @@
     <div class="container">
         <div class="sec-header">
             <div class="sec-label">Процесс</div>
-            <h2 class="sec-title">От заявки до запуска —<br>4 шага, 3 часа вашего времени</h2>
+            <h2 class="sec-title">От заявки до запуска:<br>4 шага, около 3 часов</h2>
             <p class="sec-sub">
                 Вашего времени нужно около трёх часов на весь проект.
                 Первая встреча, согласование, приёмка.
@@ -460,7 +472,7 @@
 <section class="section reveal" id="why">
     <div class="container">
         <div class="sec-label">Почему не выходит самостоятельно</div>
-        <h2 class="sec-title">Три стандартных пути —<br>три разных изъяна</h2>
+        <h2 class="sec-title">Три стандартных пути<br>с одним изъяном</h2>
         <p class="sec-sub">Не потому что подрядчики плохие. Просто задачи МСБ и Enterprise — разные.</p>
         <div class="why-grid">
             <div class="why-card">
@@ -487,7 +499,7 @@
     <div class="container">
         <div class="sec-header">
             <div class="sec-label">Услуги</div>
-            <h2 class="sec-title">Шесть AI-решений<br>с фиксированной ценой</h2>
+            <h2 class="sec-title">Шесть AI-решений<br>под конкретные задачи</h2>
             <p class="sec-sub">
                 Готовые решения под конкретные задачи. Объём работ, сроки и цена — в договоре. Без доплат по ходу.
             </p>
@@ -506,12 +518,7 @@
                     <li>Дорожная карта на 90 дней</li>
                     <li>Сравнение инструментов под задачу</li>
                 </ul>
-                <div class="service-price">
-                    <div class="price-row">
-                        <span class="price-val">40 000 ₽</span>
-                    </div>
-                    <div class="price-note">7 дней · зачтётся при внедрении</div>
-                </div>
+                
             </div>
 
             <div class="service-card featured">
@@ -526,13 +533,7 @@
                     <li>Ответы из вашей базы знаний</li>
                     <li>Переключение на живого человека</li>
                 </ul>
-                <div class="service-price">
-                    <div class="price-row">
-                        <span class="price-val">150 000 ₽</span>
-                        <span class="price-market">рынок: <s>200–500 тыс.</s></span>
-                    </div>
-                    <div class="price-note">под ключ · 21 день</div>
-                </div>
+                
             </div>
 
             <div class="service-card">
@@ -547,13 +548,7 @@
                     <li>Интерфейс в Telegram или браузере</li>
                     <li>Ролевой доступ для разных отделов</li>
                 </ul>
-                <div class="service-price">
-                    <div class="price-row">
-                        <span class="price-val">280 000 ₽</span>
-                        <span class="price-market">рынок: <s>от 2,5 млн</s></span>
-                    </div>
-                    <div class="price-note">под ключ · 30 дней</div>
-                </div>
+                
             </div>
 
             <div class="service-card">
@@ -567,12 +562,7 @@
                     <li>Генерация КП по шаблону клиента</li>
                     <li>Автоматические напоминания клиентам</li>
                 </ul>
-                <div class="service-price">
-                    <div class="price-row">
-                        <span class="price-val">240 000 ₽</span>
-                    </div>
-                    <div class="price-note">под ключ · 28 дней</div>
-                </div>
+                
             </div>
 
             <div class="service-card">
@@ -586,12 +576,7 @@
                     <li>Интеграция с <span class="tip">CMS<span class="tip-box">Система управления сайтом — WordPress, Tilda и аналоги.</span></span>, WB, Ozon</li>
                     <li>SEO-оптимизация и проверка уникальности</li>
                 </ul>
-                <div class="service-price">
-                    <div class="price-row">
-                        <span class="price-val">120 000 ₽</span>
-                    </div>
-                    <div class="price-note">под ключ · 14 дней</div>
-                </div>
+                
             </div>
 
             <div class="service-card">
@@ -605,12 +590,7 @@
                     <li>Расписание в Google Calendar / Calendly</li>
                     <li>Отчёты по воронке найма</li>
                 </ul>
-                <div class="service-price">
-                    <div class="price-row">
-                        <span class="price-val">180 000 ₽</span>
-                    </div>
-                    <div class="price-note">под ключ · 21 день</div>
-                </div>
+                
             </div>
 
         </div>
@@ -631,7 +611,7 @@
     <div class="container">
         <div class="sec-header">
             <div class="sec-label">Кейсы</div>
-            <h2 class="sec-title">Что сделали —<br>и чего это стоило</h2>
+            <h2 class="sec-title">Что сделали<br>и сколько это стоило</h2>
             <p class="sec-sub">
                 Реальные проекты. Цифры конкретные.
                 Детали — под <span class="tip">NDA<span class="tip-box">Соглашение о неразглашении — документ, защищающий коммерческую тайну клиента.</span></span>, общую картину показываем открыто.
@@ -723,8 +703,8 @@
                 <p>Готовые блоки адаптируем под вашу задачу. Когда задача типовая, не разрабатываем с нуля — поэтому укладываемся в реальные сроки, а не растягиваем на кварталы.</p>
             </div>
             <div class="diff-item">
-                <h3>Российские модели, нет санкционных рисков</h3>
-                <p>По умолчанию GigaChat и YandexGPT. Данные хранятся в России, соответствие 152-ФЗ. Нет зависимости от западных платформ и решений об ограничениях.</p>
+                <h3>Российские и дружественные модели — без санкционных рисков</h3>
+                <p>По умолчанию GigaChat и YandexGPT — российские модели, 152-ФЗ. DeepSeek используем self-hosted на серверах в России: мощная модель без зависимости от западных платформ.</p>
             </div>
             <div class="diff-item">
                 <h3>3 месяца поддержки включены в цену</h3>
@@ -873,6 +853,38 @@
     </div>
 </section>
 
+<!-- AGENTIQ PRODUCT -->
+<section class="section section-alt reveal">
+    <div class="container">
+        <div class="sec-label">Собственные продукты</div>
+        <h2 class="sec-title">Мы не только внедряем ИИ.<br>Мы сами его строим.</h2>
+        <p class="sec-sub" style="margin-bottom: 40px;">Pragma AI выросла из продуктовой команды, которая делает собственные ИИ-инструменты для бизнеса.</p>
+        <div style="background: var(--color-bg); border: 1.5px solid var(--color-border); border-radius: var(--radius-xl); padding: 36px 40px; display: flex; flex-direction: column; gap: 24px; max-width: 780px;">
+            <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 260px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <span style="font-size: 22px; font-weight: 800; color: var(--color-text);">AgentIQ</span>
+                        <span style="padding: 3px 10px; background: var(--color-accent-bg); border-radius: var(--radius-full); font-size: 11px; font-weight: 700; color: var(--color-accent);">В работе с 2025</span>
+                    </div>
+                    <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 16px;">AI-инструмент для продавцов на Wildberries. Управляет отзывами и вопросами покупателей: AI-черновики ответов, единый inbox, аналитика коммуникаций. Помогает снижать негатив и поднимать рейтинг карточек.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                        <div>
+                            <div style="font-size: 22px; font-weight: 800; color: var(--color-accent); letter-spacing: -0.5px;">+20%</div>
+                            <div style="font-size: 12px; color: var(--color-text-tertiary);">конверсия при ответе в&nbsp;первый час</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 22px; font-weight: 800; color: var(--color-accent); letter-spacing: -0.5px;">50+</div>
+                            <div style="font-size: 12px; color: var(--color-text-tertiary);">продавцов используют сейчас</div>
+                        </div>
+                    </div>
+                    <a href="https://agentiq.ru" target="_blank" rel="noopener" class="btn btn-ghost">Посмотреть AgentIQ →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <!-- FAQ -->
 <section class="section section-alt reveal" id="faq">
     <div class="container">
@@ -886,8 +898,8 @@
                 <p class="faq-a">Агентства продают кастомную разработку с нуля — это дорого и долго. Мы используем готовые AI-блоки, которые адаптируем под ваши данные и процессы. Это как покупать квартиру с отделкой вместо «коробки». Качество то же, сроки и цена — в 2–3 раза ниже.</p>
             </details>
             <details class="faq-item">
-                <summary class="faq-q">Какие <span class="tip">языковые модели<span class="tip-box">LLM (Large Language Model) — основа ChatGPT, GigaChat и аналогов. Понимают текст и генерируют ответы.</span></span> используете — нет ли санкционных рисков?<span class="faq-arrow">▾</span></summary>
-                <p class="faq-a">По умолчанию — GigaChat (Сбер) и YandexGPT. Данные хранятся в России, соответствуют 152-ФЗ, санкционных рисков нет. Для задач, где нужна более высокая точность ответов, подключаем DeepSeek (Китай) или Llama (открытый код). OpenAI/Claude — только по явному запросу клиента.</p>
+                <summary class="faq-q">Какие языковые модели используете — нет ли санкционных рисков?<span class="faq-arrow">▾</span></summary>
+                <p class="faq-a">По умолчанию — GigaChat (Сбер) и YandexGPT: данные в России, 152-ФЗ, санкционных рисков нет. Для задач с высокими требованиями к точности подключаем DeepSeek (Китай) — разворачиваем self-hosted на российских серверах, данные не покидают страну. OpenAI и Claude — только по явному запросу клиента.</p>
             </details>
             <details class="faq-item">
                 <summary class="faq-q">Нужны ли нам разработчики для поддержки после сдачи?<span class="faq-arrow">▾</span></summary>
@@ -967,16 +979,57 @@
         <div class="footer-bottom">
             <span class="footer-copy">© 2026 Pragma AI</span>
             <div class="footer-meta">
-                <a href="#">Политика конфиденциальности</a>
+                <a href="#privacy">Политика конфиденциальности</a>
                 <a href="#">Договор оферты</a>
             </div>
         </div>
     </div>
 </footer>
 
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="privacyModal">
+    <div class="modal-box">
+        <div class="modal-head">
+            <h3>Политика конфиденциальности</h3>
+            <button class="modal-close" id="privacyClose">✕</button>
+        </div>
+        <div class="modal-body">
+            <p>Настоящая Политика конфиденциальности определяет порядок обработки персональных данных пользователей сайта pragma-ai.ru (далее — Сайт), принадлежащего ООО «Прагма АИ» (далее — Оператор).</p>
+
+            <h4>1. Какие данные мы собираем</h4>
+            <p>При оставлении заявки через форму обратной связи мы собираем: имя, номер телефона, адрес электронной почты, а также содержание вашего сообщения. Данные передаются добровольно самим пользователем.</p>
+            <p>Также Сайт автоматически собирает технические данные: IP-адрес, тип браузера, страницы посещения — в обезличенном виде для статистики.</p>
+
+            <h4>2. Цели обработки</h4>
+            <p>Персональные данные используются исключительно для связи с вами по вашему запросу, подготовки коммерческого предложения и заключения договора об оказании услуг.</p>
+
+            <h4>3. Хранение и защита</h4>
+            <p>Данные хранятся на серверах, расположенных на территории Российской Федерации, в соответствии с требованиями Федерального закона № 152-ФЗ «О персональных данных». Мы применяем организационные и технические меры для защиты данных от несанкционированного доступа.</p>
+
+            <h4>4. Передача третьим лицам</h4>
+            <p>Персональные данные не передаются третьим лицам без вашего согласия, за исключением случаев, предусмотренных законодательством РФ. Для обработки данных мы можем привлекать подрядчиков (например, сервисы рассылки), которые обязаны соблюдать конфиденциальность.</p>
+
+            <h4>5. Срок хранения</h4>
+            <p>Данные хранятся до момента исполнения договора и в течение срока исковой давности (3 года), если иное не установлено законом или договором.</p>
+
+            <h4>6. Ваши права</h4>
+            <p>Вы вправе в любое время запросить доступ к своим данным, их исправление или удаление, а также отозвать согласие на обработку. Для этого направьте запрос на: <a href="mailto:hello@pragma-ai.ru" style="color: var(--color-accent);">hello@pragma-ai.ru</a>.</p>
+
+            <h4>7. Cookies</h4>
+            <p>Сайт использует файлы cookie для корректной работы и сбора анонимной статистики посещений. Используя Сайт, вы соглашаетесь с использованием cookie. Вы можете отключить cookie в настройках браузера.</p>
+
+            <h4>8. Изменения политики</h4>
+            <p>Оператор оставляет за собой право вносить изменения в настоящую Политику. Актуальная версия всегда доступна на Сайте.</p>
+
+            <p style="margin-top: 20px; font-size: 12px; color: var(--color-text-tertiary);">Дата последнего обновления: февраль 2026 г.</p>
+        </div>
+    </div>
+</div>
+
+
 <!-- MOBILE STICKY CTA -->
 <div class="mob-cta">
-    <a href="#cta" class="mob-cta-btn">Получить AI-аудит бесплатно →</a>
+    <a href="#cta" class="mob-cta-btn">Бесплатная консультация →</a>
 </div>
 
 <script>
@@ -1001,6 +1054,14 @@
             if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' }); }
         });
     });
+
+    // Privacy modal
+    const privacyLinks = document.querySelectorAll('a[href="#privacy"]');
+    const privacyModal = document.getElementById('privacyModal');
+    const privacyClose = document.getElementById('privacyClose');
+    privacyLinks.forEach(l => l.addEventListener('click', e => { e.preventDefault(); privacyModal.classList.add('open'); document.body.style.overflow = 'hidden'; }));
+    privacyClose.addEventListener('click', () => { privacyModal.classList.remove('open'); document.body.style.overflow = ''; });
+    privacyModal.addEventListener('click', e => { if (e.target === privacyModal) { privacyModal.classList.remove('open'); document.body.style.overflow = ''; } });
 </script>
 </body>
 </html>
