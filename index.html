@@ -289,7 +289,7 @@
         .tip { position: relative; display: inline; border-bottom: 1px dashed var(--color-text-secondary); cursor: help; }
         .tip-box { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #1a1a1a; color: #fff; font-size: 12px; line-height: 1.5; padding: 10px 14px; border-radius: 8px; white-space: normal; width: 230px; z-index: 200; box-shadow: 0 4px 16px rgba(0,0,0,0.2); font-weight: 400; }
         .tip-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #1a1a1a; }
-        .tip:hover .tip-box, .tip:focus-within .tip-box { display: block; }
+        .tip:hover .tip-box, .tip:focus-within .tip-box, .tip.tip-open .tip-box { display: block; }
         @media (max-width: 640px) { .tip-box { left: 0; transform: none; } .tip-box::after { left: 20px; transform: none; } }
         /* PRIVACY MODAL */
         .modal-overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
@@ -346,7 +346,7 @@
                 </h1>
                 <p class="hero-sub">
                     Чат-боты, базы знаний, AI-агенты. Объём работ, сроки и стоимость фиксируются в договоре до старта.
-                    Три встречи с вашей стороны за весь проект.
+                    Занимайтесь бизнесом. Проектом займёмся мы.
                 </p>
                 <div class="hero-cta">
                     <a href="#cta" class="btn btn-accent btn-lg">
@@ -1053,6 +1053,19 @@
             const t = document.querySelector(a.getAttribute('href'));
             if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' }); }
         });
+    });
+
+    // Mobile tooltip toggle (tap to open/close)
+    document.querySelectorAll('.tip').forEach(tip => {
+        tip.addEventListener('click', e => {
+            e.stopPropagation();
+            const isOpen = tip.classList.contains('tip-open');
+            document.querySelectorAll('.tip').forEach(t => t.classList.remove('tip-open'));
+            if (!isOpen) tip.classList.add('tip-open');
+        });
+    });
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.tip').forEach(t => t.classList.remove('tip-open'));
     });
 
     // Privacy modal
