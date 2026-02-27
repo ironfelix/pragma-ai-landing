@@ -254,7 +254,20 @@
         .cta-box h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -1.2px; line-height: 1.12; color: var(--color-text); margin-bottom: 16px; }
         .cta-box p { font-size: 16px; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 36px; }
         .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 24px; }
-        .cta-note { font-size: 12.5px; color: var(--color-text-tertiary); }
+        .cta-note { font-size: 12.5px; color: var(--color-text-tertiary); margin-top: 20px; }
+        .cta-form { text-align: left; width: 100%; max-width: 480px; margin: 0 auto; }
+        .cta-form-row { display: flex; gap: 12px; margin-bottom: 12px; }
+        .cta-form-row .form-field { flex: 1; min-width: 0; }
+        .form-field { margin-bottom: 12px; }
+        .form-field input, .form-field textarea { width: 100%; padding: 13px 16px; background: #fff; border: 1.5px solid var(--color-border); border-radius: var(--radius-md); font-family: var(--font); font-size: 14px; color: var(--color-text); outline: none; transition: border-color var(--transition), box-shadow var(--transition); box-sizing: border-box; }
+        .form-field textarea { resize: vertical; min-height: 88px; }
+        .form-field input:focus, .form-field textarea:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(26,115,232,0.08); }
+        .form-field input::placeholder, .form-field textarea::placeholder { color: var(--color-text-tertiary); }
+        .btn-submit { width: 100%; padding: 16px; font-size: 15px; border-radius: var(--radius-full); justify-content: center; }
+        .cta-tg-link { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; color: var(--color-text-tertiary); text-decoration: none; margin: 12px auto 0; transition: color var(--transition); }
+        .cta-tg-link:hover { color: var(--color-accent); }
+        .form-success { display: none; padding: 20px 24px; background: var(--color-accent-bg); border: 1px solid rgba(26,115,232,0.2); border-radius: var(--radius-lg); color: var(--color-accent); font-size: 15px; font-weight: 600; text-align: center; }
+        @media (max-width: 480px) { .cta-form-row { flex-direction: column; gap: 0; } }
 
         /* FOOTER */
         .footer { position: relative; z-index: 1; padding: 48px 0; border-top: 1px solid var(--color-border); background: var(--color-bg); }
@@ -938,16 +951,28 @@
             <span class="cta-label">Бесплатно · без обязательств</span>
             <h2>Разберёмся, сколько ИИ<br>сэкономит вашему бизнесу</h2>
             <p>Расскажите о задаче и получите конкретные цифры: какой процесс, сколько экономит в рублях и что нужно для запуска. Встреча занимает 30 минут.</p>
-            <div class="cta-actions">
-                <a href="https://t.me/pragmaai" class="btn btn-accent btn-lg">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.97 9.29c-.14.67-.53.83-1.06.52l-2.94-2.17-1.42 1.37c-.16.16-.29.29-.59.29l.21-2.99 5.43-4.9c.24-.21-.05-.32-.36-.11L7.6 14.21l-2.89-.9c-.63-.19-.64-.63.13-.93l11.28-4.35c.53-.19.99.13.82.77z" fill="currentColor"/></svg>
-                    Написать в Telegram
-                </a>
-                <a href="mailto:hello@pragma-ai.ru" class="btn btn-ghost btn-lg">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 4l-7 4.5L5 8V6l7 4.5L19 6v2z" fill="currentColor"/></svg>
-                    Email
-                </a>
-            </div>
+            <!-- Замените YOUR_FORM_ID на ID из formspree.io/forms -->
+            <form class="cta-form" id="cta-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-fields">
+                    <div class="cta-form-row">
+                        <div class="form-field">
+                            <input type="text" name="name" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-field">
+                            <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <textarea name="task" placeholder="Опишите задачу: что сейчас делается руками, сколько сотрудников тратят время, что хотите автоматизировать"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-accent btn-submit">Получить расчёт окупаемости →</button>
+                </div>
+                <div class="form-success" id="form-success">✓ Заявка отправлена! Ответим в течение 2 часов.</div>
+            </form>
+            <a href="https://t.me/pragmaai" class="cta-tg-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.97 9.29c-.14.67-.53.83-1.06.52l-2.94-2.17-1.42 1.37c-.16.16-.29.29-.59.29l.21-2.99 5.43-4.9c.24-.21-.05-.32-.36-.11L7.6 14.21l-2.89-.9c-.63-.19-.64-.63.13-.93l11.28-4.35c.53-.19.99.13.82.77z" fill="currentColor"/></svg>
+                Или напишите напрямую → @pragmaai
+            </a>
             <p class="cta-note">Ответ за 2 часа · Работаем по всей России · Договор с юрлицами и ИП</p>
         </div>
     </div>
@@ -1085,6 +1110,37 @@
     privacyLinks.forEach(l => l.addEventListener('click', e => { e.preventDefault(); privacyModal.classList.add('open'); document.body.style.overflow = 'hidden'; }));
     privacyClose.addEventListener('click', () => { privacyModal.classList.remove('open'); document.body.style.overflow = ''; });
     privacyModal.addEventListener('click', e => { if (e.target === privacyModal) { privacyModal.classList.remove('open'); document.body.style.overflow = ''; } });
+
+    // CTA form
+    const ctaForm = document.getElementById('cta-form');
+    if (ctaForm) {
+        ctaForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = ctaForm.querySelector('.btn-submit');
+            btn.disabled = true;
+            btn.textContent = 'Отправляем…';
+            try {
+                const res = await fetch(ctaForm.action, {
+                    method: 'POST',
+                    body: new FormData(ctaForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (res.ok) {
+                    ctaForm.querySelector('.form-fields').style.display = 'none';
+                    document.getElementById('form-success').style.display = 'block';
+                    if (typeof ym !== 'undefined') ym(107031191, 'reachGoal', 'form_submit');
+                } else {
+                    btn.disabled = false;
+                    btn.textContent = 'Получить расчёт окупаемости →';
+                    alert('Ошибка отправки. Напишите в Telegram: @pragmaai');
+                }
+            } catch(err) {
+                btn.disabled = false;
+                btn.textContent = 'Получить расчёт окупаемости →';
+                alert('Ошибка сети. Напишите в Telegram: @pragmaai');
+            }
+        });
+    }
 </script>
 </body>
 </html>
