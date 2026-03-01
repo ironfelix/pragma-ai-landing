@@ -311,6 +311,7 @@
         .cta-tg-link:hover { color: var(--color-accent); }
         .form-success { display: none; padding: 20px 24px; background: var(--color-accent-bg); border: 1px solid rgba(26,115,232,0.2); border-radius: var(--radius-lg); color: var(--color-accent); font-size: 15px; font-weight: 600; text-align: center; }
         @media (max-width: 480px) { .cta-form-row { flex-direction: column; gap: 0; } }
+        .hp-field { position: absolute; left: -9999px; top: -9999px; opacity: 0; height: 0; overflow: hidden; }
 
         /* FOOTER */
         .footer { position: relative; z-index: 1; padding: 48px 0; border-top: 1px solid var(--color-border); background: var(--color-bg); }
@@ -995,7 +996,7 @@
             <h2>Разберёмся, сколько ИИ<br>сэкономит вашему бизнесу</h2>
             <p>Расскажите о задаче и получите конкретные цифры: какой процесс, сколько экономит в рублях и что нужно для запуска. Встреча занимает 30 минут.</p>
             <!-- Замените YOUR_FORM_ID на ID из formspree.io/forms -->
-            <form class="cta-form" id="cta-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form class="cta-form" id="cta-form" action="https://agentiq.ru/pragma-lead" method="POST">
                 <div class="form-fields">
                     <div class="cta-form-row">
                         <div class="form-field">
@@ -1007,6 +1008,9 @@
                     </div>
                     <div class="form-field">
                         <textarea name="task" placeholder="Опишите задачу: что сейчас делается руками, сколько сотрудников тратят время, что хотите автоматизировать"></textarea>
+                    </div>
+                    <div class="hp-field" aria-hidden="true">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
                     </div>
                     <button type="submit" class="btn btn-accent btn-submit">Получить расчёт окупаемости →</button>
                 </div>
@@ -1159,6 +1163,8 @@
     if (ctaForm) {
         ctaForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            // Honeypot: если бот заполнил скрытое поле — тихо игнорируем
+            if (ctaForm.querySelector('[name="website"]').value) return;
             const btn = ctaForm.querySelector('.btn-submit');
             btn.disabled = true;
             btn.textContent = 'Отправляем…';
