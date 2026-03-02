@@ -120,7 +120,14 @@
         @media (min-width: 768px) { .nav-links { display: flex; } }
         .nav-link { padding: 6px 12px; color: var(--color-text-secondary); text-decoration: none; font-size: 13.5px; font-weight: 500; border-radius: var(--radius-sm); transition: color var(--transition); }
         .nav-link:hover { color: var(--color-text); }
-        .nav-actions { display: flex; align-items: center; gap: 10px; }
+        .nav-actions { display: flex; align-items: center; gap: 16px; }
+        .nav-phone { font-size: 13.5px; font-weight: 600; color: var(--color-text); text-decoration: none; letter-spacing: -0.2px; transition: color var(--transition); }
+        .nav-phone:hover { color: var(--color-accent); }
+        @media (max-width: 768px) { .nav-phone { display: none; } }
+        .cta-phone-link { color: inherit; font-weight: 600; text-decoration: none; transition: color var(--transition); }
+        .cta-phone-link:hover { color: var(--color-accent); }
+        .footer-phone { display: inline-block; font-size: 14px; font-weight: 600; color: var(--color-text); text-decoration: none; margin-top: 10px; transition: color var(--transition); }
+        .footer-phone:hover { color: var(--color-accent); }
 
         .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border: none; border-radius: var(--radius-full); font-family: var(--font); font-size: 13.5px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all var(--transition); }
         .btn-primary { background: var(--color-text); color: #fff; }
@@ -394,6 +401,7 @@
                 <a href="#faq" class="nav-link">FAQ</a>
             </div>
             <div class="nav-actions">
+                <a href="tel:+74958681013" class="nav-phone">+7 495 868-10-13</a>
                 <a href="#cta" class="btn btn-primary">Записаться</a>
             </div>
         </div>
@@ -1019,7 +1027,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.97 9.29c-.14.67-.53.83-1.06.52l-2.94-2.17-1.42 1.37c-.16.16-.29.29-.59.29l.21-2.99 5.43-4.9c.24-.21-.05-.32-.36-.11L7.6 14.21l-2.89-.9c-.63-.19-.64-.63.13-.93l11.28-4.35c.53-.19.99.13.82.77z" fill="currentColor"/></svg>
                 Или напишите напрямую → @pragmaai
             </a>
-            <p class="cta-note">Работаем по всей России · Договор с юрлицами и ИП</p>
+            <p class="cta-note"><a href="tel:+74958681013" class="cta-phone-link">+7 495 868-10-13</a> · Работаем по всей России · Договор с юрлицами и ИП</p>
         </div>
     </div>
 </section>
@@ -1033,6 +1041,7 @@
                     PRAGMA<span> AI</span>
                 </a>
                 <p class="footer-tagline">AI-автоматизация для бизнеса. Фиксированная цена. Результат за 30 дней.</p>
+                <a href="tel:+74958681013" class="footer-phone">+7 495 868-10-13</a>
             </div>
             <div class="footer-cols">
                 <div class="footer-col">
@@ -1052,13 +1061,20 @@
                         <li><a href="#cases">Кейсы</a></li>
                         <li><a href="#pricing">Цены</a></li>
                         <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#cta">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li><a href="tel:+74958681013">+7 495 868-10-13</a></li>
+                        <li><a href="mailto:hello@pragma-ai.ru">hello@pragma-ai.ru</a></li>
+                        <li><a href="https://t.me/pragmaai" target="_blank" rel="noopener">Telegram: @pragmaai</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <span class="footer-copy">© 2026 Pragma AI</span>
+            <span class="footer-copy">© 2026 ИП Ильин · ИНН 621506150516</span>
             <div class="footer-meta">
                 <a href="#privacy">Политика конфиденциальности</a>
                 <a href="#">Договор оферты</a>
