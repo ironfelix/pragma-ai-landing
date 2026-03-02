@@ -336,14 +336,14 @@
         .footer-meta a { font-size: 12.5px; color: var(--color-text-tertiary); text-decoration: none; transition: color var(--transition); }
         .footer-meta a:hover { color: var(--color-text-secondary); }
 
-        /* CLIENTS BAR */
-        .clients-bar { padding: 28px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); background: var(--color-bg-secondary); }
-        .clients-bar__inner { display: flex; align-items: center; gap: 40px; }
-        .clients-bar__cap { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--color-text-tertiary); white-space: nowrap; flex-shrink: 0; }
-        .clients-bar__logos { display: flex; align-items: center; gap: 52px; flex-wrap: wrap; }
-        .clients-bar__logo { height: 26px; width: auto; display: block; filter: grayscale(100%) opacity(0.45); transition: filter 0.25s; }
-        .clients-bar__logo:hover { filter: grayscale(0%) opacity(1); }
-        @media (max-width: 640px) { .clients-bar__inner { gap: 24px; } .clients-bar__logos { gap: 32px; } .clients-bar__logo { height: 20px; } }
+        /* CLIENTS (hero) */
+        .hero-clients { display: flex; align-items: center; gap: 20px; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--color-border-light); animation: fadeUp 0.55s ease 0.4s forwards; opacity: 0; flex-wrap: wrap; }
+        .hero-clients__cap { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--color-text-tertiary); white-space: nowrap; flex-shrink: 0; }
+        .hero-clients__logos { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+        .hero-clients__logo { height: 22px; width: auto; display: block; filter: grayscale(100%) opacity(0.45); transition: filter 0.25s; }
+        .hero-clients__logo[alt="Фактор продаж"] { height: 16px; }
+        .hero-clients__logo[alt="Елки Family"] { height: 26px; }
+        .hero-clients__logo:hover { filter: grayscale(0%) opacity(1); }
 
         /* MOBILE CTA */
         .mob-cta { display: flex; position: fixed; bottom: 20px; left: 0; right: 0; padding: 0 20px; z-index: 100; }
@@ -454,6 +454,14 @@
                         Российские и дружественные <span class="tip">языковые модели<span class="tip-box">GigaChat, YandexGPT — российские. DeepSeek (Китай) — разворачиваем на серверах в России, данные не уходят.</span></span>
                     </div>
                 </div>
+                <div class="hero-clients">
+                    <span class="hero-clients__cap">Клиенты</span>
+                    <div class="hero-clients__logos">
+                        <img class="hero-clients__logo" src="/img/logo-unisender.svg" alt="Unisender">
+                        <img class="hero-clients__logo" src="/img/logo-factor.svg" alt="Фактор продаж">
+                        <img class="hero-clients__logo" src="/img/logo-elki.png" alt="Елки Family">
+                    </div>
+                </div>
             </div>
 
             <!-- Рыночные данные -->
@@ -509,20 +517,6 @@
         <div class="ticker-item">
             <span class="ticker-num">2025–2027</span>
             <span class="ticker-text">фаза раннего большинства — автоматизация ещё даёт преимущество</span>
-        </div>
-    </div>
-</div>
-
-<!-- CLIENTS BAR -->
-<div class="clients-bar">
-    <div class="container">
-        <div class="clients-bar__inner">
-            <span class="clients-bar__cap">Клиенты</span>
-            <div class="clients-bar__logos">
-                <img class="clients-bar__logo" src="/img/logo-unisender.svg" alt="Unisender" height="26">
-                <img class="clients-bar__logo" src="/img/logo-factor.svg" alt="Фактор продаж" height="26">
-                <img class="clients-bar__logo" src="/img/logo-elki.png" alt="Елки Family" height="26">
-            </div>
         </div>
     </div>
 </div>
