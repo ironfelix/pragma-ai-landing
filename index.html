@@ -995,8 +995,7 @@
             <span class="cta-label">Бесплатно · без обязательств</span>
             <h2>Разберёмся, сколько ИИ<br>сэкономит вашему бизнесу</h2>
             <p>Расскажите о задаче и получите конкретные цифры: какой процесс, сколько экономит в рублях и что нужно для запуска. Встреча занимает 30 минут.</p>
-            <!-- Замените YOUR_FORM_ID на ID из formspree.io/forms -->
-            <form class="cta-form" id="cta-form" action="https://agentiq.ru/pragma-lead" method="POST">
+            <form class="cta-form" id="cta-form" action="/submit" method="POST">
                 <div class="form-fields">
                     <div class="cta-form-row">
                         <div class="form-field">
@@ -1171,8 +1170,8 @@
             try {
                 const res = await fetch(ctaForm.action, {
                     method: 'POST',
-                    body: new FormData(ctaForm),
-                    headers: { 'Accept': 'application/json' }
+                    body: new URLSearchParams(new FormData(ctaForm)),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' }
                 });
                 if (res.ok) {
                     ctaForm.querySelector('.form-fields').style.display = 'none';
