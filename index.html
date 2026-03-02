@@ -336,6 +336,15 @@
         .footer-meta a { font-size: 12.5px; color: var(--color-text-tertiary); text-decoration: none; transition: color var(--transition); }
         .footer-meta a:hover { color: var(--color-text-secondary); }
 
+        /* CLIENTS BAR */
+        .clients-bar { padding: 28px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); background: var(--color-bg-secondary); }
+        .clients-bar__inner { display: flex; align-items: center; gap: 40px; }
+        .clients-bar__cap { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--color-text-tertiary); white-space: nowrap; flex-shrink: 0; }
+        .clients-bar__logos { display: flex; align-items: center; gap: 52px; flex-wrap: wrap; }
+        .clients-bar__logo { height: 26px; width: auto; display: block; filter: grayscale(100%) opacity(0.45); transition: filter 0.25s; }
+        .clients-bar__logo:hover { filter: grayscale(0%) opacity(1); }
+        @media (max-width: 640px) { .clients-bar__inner { gap: 24px; } .clients-bar__logos { gap: 32px; } .clients-bar__logo { height: 20px; } }
+
         /* MOBILE CTA */
         .mob-cta { display: flex; position: fixed; bottom: 20px; left: 0; right: 0; padding: 0 20px; z-index: 100; }
         @media (min-width: 640px) { .mob-cta { display: none; } }
@@ -401,7 +410,6 @@
                 <a href="#faq" class="nav-link">FAQ</a>
             </div>
             <div class="nav-actions">
-                <a href="tel:+74958681013" class="nav-phone">+7 495 868-10-13</a>
                 <a href="#cta" class="btn btn-primary">Записаться</a>
             </div>
         </div>
@@ -501,6 +509,20 @@
         <div class="ticker-item">
             <span class="ticker-num">2025–2027</span>
             <span class="ticker-text">фаза раннего большинства — автоматизация ещё даёт преимущество</span>
+        </div>
+    </div>
+</div>
+
+<!-- CLIENTS BAR -->
+<div class="clients-bar">
+    <div class="container">
+        <div class="clients-bar__inner">
+            <span class="clients-bar__cap">Клиенты</span>
+            <div class="clients-bar__logos">
+                <img class="clients-bar__logo" src="/img/logo-unisender.svg" alt="Unisender" height="26">
+                <img class="clients-bar__logo" src="/img/logo-factor.svg" alt="Фактор продаж" height="26">
+                <img class="clients-bar__logo" src="/img/logo-elki.png" alt="Елки Family" height="26">
+            </div>
         </div>
     </div>
 </div>
@@ -1027,7 +1049,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.97 9.29c-.14.67-.53.83-1.06.52l-2.94-2.17-1.42 1.37c-.16.16-.29.29-.59.29l.21-2.99 5.43-4.9c.24-.21-.05-.32-.36-.11L7.6 14.21l-2.89-.9c-.63-.19-.64-.63.13-.93l11.28-4.35c.53-.19.99.13.82.77z" fill="currentColor"/></svg>
                 Или напишите напрямую → @pragmaai
             </a>
-            <p class="cta-note"><a href="tel:+74958681013" class="cta-phone-link">+7 495 868-10-13</a> · Работаем по всей России · Договор с юрлицами и ИП</p>
+            <p class="cta-note">Работаем по всей России · Договор с юрлицами и ИП</p>
         </div>
     </div>
 </section>
@@ -1041,7 +1063,6 @@
                     PRAGMA<span> AI</span>
                 </a>
                 <p class="footer-tagline">AI-автоматизация для бизнеса. Фиксированная цена. Результат за 30 дней.</p>
-                <a href="tel:+74958681013" class="footer-phone">+7 495 868-10-13</a>
             </div>
             <div class="footer-cols">
                 <div class="footer-col">
@@ -1066,7 +1087,6 @@
                 <div class="footer-col">
                     <h4>Контакты</h4>
                     <ul class="footer-links">
-                        <li><a href="tel:+74958681013">+7 495 868-10-13</a></li>
                         <li><a href="mailto:hello@pragma-ai.ru">hello@pragma-ai.ru</a></li>
                         <li><a href="https://t.me/pragmaai" target="_blank" rel="noopener">Telegram: @pragmaai</a></li>
                     </ul>
